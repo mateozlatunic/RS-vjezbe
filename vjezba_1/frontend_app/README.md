@@ -1,4 +1,4 @@
-# Klijent-posluzitelj
+# Frontend
 
 ## Objava staticne stranice:
 - link: https://rs-vjezbe-nlk9.onrender.com 
