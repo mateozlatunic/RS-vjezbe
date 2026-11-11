@@ -1,0 +1,50 @@
+{
+  "jelovnik": [
+    {
+      "id": 1,
+      "naziv": "Pizza Margherita",
+      "cijena": 45.0
+    },
+    {
+      "id": 2,
+      "naziv": "Pasta Carbonara",
+      "cijena": 55.0
+    },
+    {
+      "id": 3,
+      "naziv": "Salata Caprese",
+      "cijena": 35.0
+    }
+  ],
+  "recenzije": [
+    {
+      "gost": "Marko",
+      "ocjena": 5,
+      "komentar": "Odlična hrana!"
+    },
+    {
+      "gost": "Hanna",
+      "ocjena": 4,
+      "komentar": "Dobar izbor jela."
+    },
+    {
+      "gost": "Bob",
+      "ocjena": 3,
+      "komentar": "Prosječno iskustvo."
+    }
+  ],
+  "stolovi": [
+    {
+      "oznaka": "T1",
+      "slobodna_mjesta": 4
+    },
+    {
+      "oznaka": "T2",
+      "slobodna_mjesta": 4
+    },
+    {
+      "oznaka": "T3",
+      "slobodna_mjesta": 8
+    }
+  ]
+}

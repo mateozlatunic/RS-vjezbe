@@ -5,6 +5,18 @@ const API = import.meta.env.VITE_API_URL ?? 'http://localhost:8000'
 const items = ref([])
 const name = ref('')
 const error = ref('')
+const podaci = ref(null)
+const podaciError = ref('')
+
+async function loadPodaci() {
+  try {
+    podaciError.value = ''
+    const res = await fetch(`${import.meta.env.BASE_URL}podaci.json`)
+    podaci.value = await res.json()
+  } catch (e) {
+    podaciError.value = 'Ne mogu učitati podaci.json.'
+  }
+}
 
 async function load() {
   try {
@@ -32,11 +44,14 @@ async function remove(id) {
   load()
 }
 
-onMounted(load)
+onMounted(() => {
+  load()
+  loadPodaci()
+})
 </script>
 
-<template>
-  <main>
+<template>  
+  <main>    
     <h1>Stavke</h1>
 
     <form @submit.prevent="add">
@@ -52,6 +67,31 @@ onMounted(load)
         <button @click="remove(i.id)">Obriši</button>
       </li>
     </ul>
+
+        <section v-if="podaci">
+      <h2>Jelovnik</h2>
+      <ul>
+        <li v-for="j in podaci.jelovnik" :key="j.id">
+          {{ j.naziv }} — {{ j.cijena.toFixed(2) }} €
+        </li>
+      </ul>
+
+      <h2>Recenzije</h2>
+      <ul>
+        <li v-for="r in podaci.recenzije" :key="r.gost">
+          <strong>{{ r.gost }}</strong> ({{ r.ocjena }}/5): {{ r.komentar }}
+        </li>
+      </ul>
+
+      <h2>Stolovi</h2>
+      <ul>
+        <li v-for="s in podaci.stolovi" :key="s.oznaka">
+          {{ s.oznaka }}: {{ s.slobodna_mjesta }} slobodnih mjesta
+        </li>
+      </ul>
+    </section>
+    <p v-if="podaciError">{{ podaciError }}</p>
+
   </main>
 </template>
 
