@@ -71,6 +71,9 @@ async def main():
         "stolovi": random.uniform(1, 3),
     }
 
+    print("Vrijeme čekanja:", {k: round(v, 2) for k, v in cekanja.items()})
+
+
     print("\nSekvencijalno:")
     rezultat_sek, t_sek = await sekvencijalno(cekanja)
     print(f"Trajanje: {t_sek:.2f} s")
@@ -86,21 +89,3 @@ async def main():
 
 
 asyncio.run(main())
-
-
-
-
-
-# 1. - sekvencijalna obrada traje duze, jer se funkcije izvršavaju jedna za drugom
-#    - svaki await se mora završiti prije nego što se pozove sljedeća korutina, pa se čekanja zbrajaju
-
-# 2. - konkurentna obrada traje kraće, jer se funkcije izvršavaju paralelno
-#    - await asyncio.gather() omogućuje da se sve korutine pokrenu istovremeno
-
-# 3. - sekvencijalno se sljedeća operacija ne započinje dok prethodna ne završi
-#    - konkurentno se sve operacije započnu, a čekanja se preklapaju
-
-# 4. - konkurentna obrada postaje jednako spora kao i sekvencijalna obrada
-#    - asyncio.sleep ne uspavljuje dretvu. Dretva je cijelo vrijeme slobodna za rad na drugim korutinama
-
-# 5. - gather() rezultate uvijek vraća redoslijedom kojim su korutine proslijeđene, a ne redoslijedom dovršavanja.
